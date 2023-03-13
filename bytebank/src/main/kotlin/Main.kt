@@ -1,6 +1,12 @@
 fun main() {
     println("Bem vindo ao Bytebank")
-    val titular = "Vinícius"
+    val titular: String = "Vinícius"
+    val numeroConta: Int = 1000
+    var saldo = 0.0
+    saldo = 100 + 2.0
+    saldo += 200
 
-    print("titular $titular")
+    println("titular $titular")
+    println("número da conta $numeroConta")
+    println("saldo da conta $saldo")
 }
