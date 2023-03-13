@@ -18,22 +18,39 @@ fun main() {
     println(contaVinicius.numero)
     println(contaVinicius.saldo)
 
-    deposita(contaVinicius, 50.0)
+    contaVinicius.deposita(50.0)
     println(contaVinicius.saldo)
-    deposita(contaFran, 70.0)
+    contaFran.deposita(70.0)
     println(contaFran.saldo)
+
+    contaVinicius.saca(20.0)
+    println(contaVinicius.saldo)
+    contaFran.saca(40.0)
+    println(contaFran.saldo)
+
+    println("Saque em excesso")
+    contaVinicius.saca(1000.0)
+    println(contaVinicius.saldo)
 }
 
 class Conta {
     var titular = ""
     var numero = 0
     var saldo = 0.0
+
+    fun deposita(valor: Double) {
+        println("Depositando na conta do(a) $titular")
+        this.saldo += valor
+    }
+
+    fun saca(valor: Double) {
+        if (saldo >= valor) {
+            println("Sacando na conta do(a) $titular")
+            saldo -= valor
+        }
+    }
 }
 
-fun deposita(conta: Conta, valor: Double) {
-    println("Depositando na conta do(a) ${conta.titular}")
-    conta.saldo += valor
-}
 fun testaCopiasEReferencias() {
     val numeroX = 10
     var numeroY = numeroX
