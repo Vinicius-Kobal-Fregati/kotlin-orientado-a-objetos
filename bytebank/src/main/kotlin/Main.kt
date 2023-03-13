@@ -9,14 +9,32 @@ fun main() {
     contaFran.titular = "Fran"
     contaFran.numero = 1001
     contaFran.saldo = 300.0
-//    println(contaFran.titular)
-//    println(contaFran.numero)
-//    println(contaFran.saldo)
-//
-//    println(contaVinicius.titular)
-//    println(contaVinicius.numero)
-//    println(contaVinicius.saldo)
 
+    println(contaFran.titular)
+    println(contaFran.numero)
+    println(contaFran.saldo)
+
+    println(contaVinicius.titular)
+    println(contaVinicius.numero)
+    println(contaVinicius.saldo)
+
+    deposita(contaVinicius, 50.0)
+    println(contaVinicius.saldo)
+    deposita(contaFran, 70.0)
+    println(contaFran.saldo)
+}
+
+class Conta {
+    var titular = ""
+    var numero = 0
+    var saldo = 0.0
+}
+
+fun deposita(conta: Conta, valor: Double) {
+    println("Depositando na conta do(a) ${conta.titular}")
+    conta.saldo += valor
+}
+fun testaCopiasEReferencias() {
     val numeroX = 10
     var numeroY = numeroX
     numeroY++
@@ -33,12 +51,6 @@ fun main() {
     // Os dois mudam pois a referêcia deles é igual, ou seja, apontam para o mesmo objeto
     println("titular conta joão:  ${contaJoao.titular}")
     println("titular conta maria: ${contaMaria.titular}")
-}
-
-class Conta {
-    var titular = ""
-    var numero = 0
-    var saldo = 0.0
 }
 
 fun testaCondicoes(saldo: Double) {
