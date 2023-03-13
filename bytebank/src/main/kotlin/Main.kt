@@ -1,13 +1,9 @@
 fun main() {
     println("Bem vindo ao Bytebank")
-    val contaVinicius = Conta()
-    contaVinicius.titular = "Vinícius"
-    contaVinicius.numero = 1000
+    val contaVinicius = Conta("Vinícius", 1000)
     contaVinicius.deposita(200.0)
 
-    val contaFran = Conta()
-    contaFran.titular = "Fran"
-    contaFran.numero = 1001
+    val contaFran = Conta("Fran", 1001)
     contaFran.deposita(300.0)
 
     println(contaFran.titular)
@@ -42,9 +38,10 @@ fun main() {
     println(contaFran.saldo)
 }
 
-class Conta {
-    var titular = ""
-    var numero = 0
+class Conta(
+    var titular: String,
+    var numero: Int
+) {
     var saldo = 0.0
         private set
     /*
@@ -54,6 +51,14 @@ class Conta {
                 field = valor
             }
         }
+     */
+
+    /*
+    //Construtor secundário
+    constructor(titular: String, numero: Int) {
+        this.titular = titular
+        this.numero = numero
+    }
      */
 
     fun deposita(valor: Double) {
@@ -89,8 +94,7 @@ fun testaCopiasEReferencias() {
     println("numeroX $numeroX")
     println("numeroY $numeroY")
 
-    val contaJoao = Conta()
-    contaJoao.titular = "João"
+    val contaJoao = Conta("João", 1002)
     val contaMaria = contaJoao
     contaMaria.titular = "Maria"
 
