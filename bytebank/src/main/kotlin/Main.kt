@@ -3,34 +3,34 @@ fun main() {
     val contaVinicius = Conta()
     contaVinicius.titular = "Vinícius"
     contaVinicius.numero = 1000
-    contaVinicius.setSaldo(200.0)
+    contaVinicius.deposita(200.0)
 
     val contaFran = Conta()
     contaFran.titular = "Fran"
     contaFran.numero = 1001
-    contaFran.setSaldo(300.0)
+    contaFran.deposita(300.0)
 
     println(contaFran.titular)
     println(contaFran.numero)
-    println(contaFran.getSaldo())
+    println(contaFran.saldo)
 
     println(contaVinicius.titular)
     println(contaVinicius.numero)
-    println(contaVinicius.getSaldo())
+    println(contaVinicius.saldo)
 
     contaVinicius.deposita(50.0)
-    println(contaVinicius.getSaldo())
+    println(contaVinicius.saldo)
     contaFran.deposita(70.0)
-    println(contaFran.getSaldo())
+    println(contaFran.saldo)
 
     contaVinicius.saca(20.0)
-    println(contaVinicius.getSaldo())
+    println(contaVinicius.saldo)
     contaFran.saca(40.0)
-    println(contaFran.getSaldo())
+    println(contaFran.saldo)
 
     println("Saque em excesso")
     contaVinicius.saca(1000.0)
-    println(contaVinicius.getSaldo())
+    println(contaVinicius.saldo)
 
     if (contaFran.transfere(100.0, contaVinicius)) {
         println("Transferência sucedida")
@@ -38,14 +38,23 @@ fun main() {
         println("Falha na transferência")
     }
 
-    println(contaVinicius.getSaldo())
-    println(contaFran.getSaldo())
+    println(contaVinicius.saldo)
+    println(contaFran.saldo)
 }
 
 class Conta {
     var titular = ""
     var numero = 0
-    private var saldo = 0.0
+    var saldo = 0.0
+        private set
+    /*
+        set(valor) {
+            // field é o valor interno da property
+            if (valor > 0) {
+                field = valor
+            }
+        }
+     */
 
     fun deposita(valor: Double) {
         println("Depositando na conta do(a) $titular")
@@ -69,15 +78,6 @@ class Conta {
         return false
     }
 
-    fun getSaldo(): Double {
-        return saldo
-    }
-
-    fun setSaldo(valor: Double) {
-        if (valor > 0) {
-            saldo = valor
-        }
-    }
 }
 
 fun testaCopiasEReferencias() {
