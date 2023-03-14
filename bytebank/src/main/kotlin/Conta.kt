@@ -1,9 +1,9 @@
-open class Conta(
+abstract class Conta(
     var titular: String,
     val numero: Int = 0
 ) {
     var saldo = 0.0
-        private set
+        protected set
     /*
         set(valor) {
             // field é o valor interno da property
@@ -31,12 +31,7 @@ open class Conta(
         this.saldo += valor
     }
 
-    open fun saca(valor: Double) {
-        if (saldo >= valor) {
-            println("Sacando na conta do(a) $titular")
-            saldo -= valor
-        }
-    }
+    abstract fun saca(valor: Double)
 
     fun transfere(valor: Double, destino: Conta): Boolean {
         if (saldo >= valor) {
