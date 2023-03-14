@@ -1,7 +1,8 @@
 class Cliente(
     val nome: String,
     val cpf: String,
-    val senha: Int
+    // Precisou do override pois estamos sobrescrevendo o da interface
+    private val senha: Int
 ) : Autenticavel {
     override fun autentica(senha: Int): Boolean {
         if (this.senha == senha)

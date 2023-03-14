@@ -9,7 +9,14 @@ class Diretor(
     cpf = cpf,
     salario = salario,
     senha = senha
-), Autenticavel {
+) {
 
     override val bonificacao: Double get() = salario + plr
+
+    /*
+    // Usado caso a função autentica da interface tivesse corpo e fossemos usar a implementação dela
+    override fun autentica(senha: Int): Boolean {
+        return super<Autenticavel>.autentica(senha)
+    }
+     */
 }

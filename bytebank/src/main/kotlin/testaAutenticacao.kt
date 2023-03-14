@@ -24,4 +24,6 @@ fun testaAutenticacao() {
     sistema.entra(gerente, 1235)
     sistema.entra(diretora, 1234)
     sistema.entra(cliente, 1234)
+
+    val autenticavel: Autenticavel = Cliente(nome = "Ruan", cpf = "000.000.000-00", senha = 1111)
 }
