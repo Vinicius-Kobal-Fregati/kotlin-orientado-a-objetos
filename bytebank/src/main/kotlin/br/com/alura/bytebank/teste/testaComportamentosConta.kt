@@ -1,20 +1,30 @@
 package br.com.alura.bytebank.teste
 
+import br.com.alura.bytebank.modelo.Cliente
 import br.com.alura.bytebank.modelo.ContaCorrente
 import br.com.alura.bytebank.modelo.ContaPoupanca
 
 fun testaComportamentosConta() {
-    val contaVinicius = ContaCorrente("Vinícius")
+    val contaVinicius = ContaCorrente(
+        Cliente("Vinícius", "12", 1)
+    )
     contaVinicius.deposita(200.0)
 
-    val contaFran = ContaPoupanca(numero = 1001, titular = "Fran")
+    val contaFran = ContaPoupanca(
+        numero = 1001,
+        titular = Cliente(
+            "Fran",
+            "21",
+            2
+        )
+    )
     contaFran.deposita(300.0)
 
-    println(contaFran.titular)
+    println(contaFran.titular.nome)
     println(contaFran.numero)
     println(contaFran.saldo)
 
-    println(contaVinicius.titular)
+    println(contaVinicius.titular.nome)
     println(contaVinicius.numero)
     println(contaVinicius.saldo)
 

@@ -3,7 +3,7 @@ package br.com.alura.bytebank.modelo
 import br.com.alura.bytebank.modelo.Conta
 
 abstract class ContaTransferivel(
-    titular: String,
+    titular: Cliente,
     numero: Int = 0
 ) : Conta(
     titular = titular,
