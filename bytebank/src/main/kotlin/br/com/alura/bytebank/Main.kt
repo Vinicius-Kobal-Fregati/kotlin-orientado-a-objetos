@@ -6,38 +6,6 @@ fun main() {
     println("Bem vindo ao Bytebank")
 
     println("início main")
-    val entrada: String = "1,9"
-
-    // Usando o try como expressão (try-expression)
-    val valorRecebido: Double? = try {
-        // retorna sempre a última linha
-        entrada.toDouble()
-    } catch (e: NumberFormatException) {
-        println("Problema na conversão")
-        e.printStackTrace()
-        null
-    }
-
-    // Usando if como expressão (if-expression)
-    val valorComTaxa: Double? = if(valorRecebido != null) {
-        // retorna sempre a última linha
-        valorRecebido + 0.1
-    } else {
-        null
-    }
-
-    // When expression
-    val possuiTaxa: Boolean = when {
-        valorComTaxa != null -> true
-        else -> false
-    }
-
-    if (valorComTaxa != null) {
-        println("valor recebido: $valorComTaxa")
-    } else {
-        println("valor inválido")
-    }
-
     funcao1()
     println("fim main")
 }
@@ -45,7 +13,7 @@ fun main() {
 fun funcao1() {
     println("início funcao1")
     try {
-        funcao4()
+        funcao2()
     } catch (e: ClassCastException) {
 //        println(e.message)
 //        println(e.stackTrace)
@@ -63,7 +31,8 @@ fun funcao2() {
         println(i)
         val endereco = Any()
         try {
-            endereco as Endereco
+            //endereco as Endereco
+            throw ClassCastException()
         } catch (e: ClassCastException) {
             println("ClassCastException foi pega")
         }
