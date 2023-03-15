@@ -45,7 +45,7 @@ fun testaComportamentosConta() {
     println(contaVinicius.saldo)
 
     try {
-        contaFran.transfere(destino = contaVinicius, valor = 100.0, senha = 1)
+        contaFran.transfere(destino = contaVinicius, valor = 100.0, senha = 2)
         println("Transferência sucedida")
     } catch (e: SaldoInsuficienteException) {
         println("Falha na transferência")
@@ -54,6 +54,9 @@ fun testaComportamentosConta() {
     } catch (e: FalhaAutenticacaoException) {
         println("Falha na transferência")
         println("Falha na autenticação")
+        e.printStackTrace()
+    } catch (e: Exception) {
+        println("Erro desconhecido")
         e.printStackTrace()
     }
 

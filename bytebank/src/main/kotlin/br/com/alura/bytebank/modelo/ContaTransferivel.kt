@@ -24,6 +24,7 @@ abstract class ContaTransferivel(
         println("Transferência da conta do(a) $titular para o(a) ${destino.titular}")
         saldo -= valor
         destino.deposita(valor)
+        throw RuntimeException()
     }
 
     override fun autentica(senha: Int): Boolean {
