@@ -10,4 +10,20 @@ class CalculadoraBonificacao {
     fun registra(funcionario: Funcionario) {
         this.total += funcionario.bonificacao
     }
+
+    /*
+    fun registra(funcionario: Any) {
+        //Cast
+        //val funcionarioNovo: Funcionario =
+        // Smart cast
+        funcionario as Funcionario
+        this.total += funcionario.bonificacao
+    }
+
+    fun registra(funcionario: Any) {
+        if (funcionario is Funcionario) {
+            this.total += funcionario.bonificacao
+        }
+    }
+     */
 }

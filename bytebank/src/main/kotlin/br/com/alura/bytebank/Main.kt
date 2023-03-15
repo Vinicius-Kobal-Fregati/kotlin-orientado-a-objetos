@@ -5,16 +5,15 @@ import br.com.alura.bytebank.modelo.Endereco
 fun main() {
     println("Bem vindo ao Bytebank")
 
-    println()
-    println(1)
-    println(1.1)
-    println(true)
-    println("teste")
-
     val endereco = Endereco()
     println(endereco)
 
+    imprime(Unit)
+    imprime(1)
+    imprime(1.0)
+
     val objeto: Any = Any()
+    // referência para o object do java lang, mas ele não é um object, não faz herança dele
     imprime(objeto)
 
     val teste: Any = imprime(endereco)
