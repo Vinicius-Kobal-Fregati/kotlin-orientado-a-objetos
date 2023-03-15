@@ -6,7 +6,8 @@ fun testaFuncionarios() {
     val vinicius = Analista(
         nome = "Vinícius",
         cpf = "111.111.111-11",
-        salario = 2000.0
+        salario = 2000.0,
+        senha = 1234
     )
 
     println("nome ${vinicius.nome}")
@@ -53,7 +54,8 @@ fun testaFuncionarios() {
     val maria: Funcionario = Analista(
         nome = "Maria",
         cpf = "444.444.444-44",
-        salario = 3000.0
+        salario = 3000.0,
+        senha = 1234
     )
 
     val calculadora = CalculadoraBonificacao()
