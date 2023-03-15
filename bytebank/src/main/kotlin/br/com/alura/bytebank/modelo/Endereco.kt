@@ -9,5 +9,16 @@ class Endereco(
     var cep: String = "",
     var complemento: String = ""
 ) {
-
+    override fun toString(): String {
+        // raw string
+        return """
+            Endereco(logradouro='$logradouro', 
+            numeroEndereco=$numeroEndereco, 
+            bairro='$bairro', 
+            cidade='$cidade', 
+            estado='$estado', 
+            cep='$cep', 
+            complemento='$complemento')
+            """.trimIndent()
+    }
 }
