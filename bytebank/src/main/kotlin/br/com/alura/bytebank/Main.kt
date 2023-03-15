@@ -1,5 +1,6 @@
 package br.com.alura.bytebank
 
+import br.com.alura.bytebank.exception.SaldoInsuficienteException
 import br.com.alura.bytebank.modelo.Endereco
 
 fun main() {
@@ -14,12 +15,12 @@ fun funcao1() {
     println("início funcao1")
     try {
         funcao2()
-    } catch (e: ClassCastException) {
+    } catch (e: SaldoInsuficienteException) {
 //        println(e.message)
 //        println(e.stackTrace)
 //        println(e.cause)
         e.printStackTrace()
-        println("ClassCastException foi pega")
+        println("SaldoInsuficienteException foi pega")
     }
     //funcao3()
     println("fim funcao1")
@@ -36,6 +37,7 @@ fun funcao2() {
         } catch (e: ClassCastException) {
             println("ClassCastException foi pega")
         }
+        throw SaldoInsuficienteException()
     }
     println("fim funcao2")
 }
