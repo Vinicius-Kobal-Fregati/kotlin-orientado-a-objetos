@@ -4,33 +4,46 @@ import br.com.alura.bytebank.modelo.Endereco
 
 fun main() {
     println("Bem vindo ao Bytebank")
+    var enderecoNulo: Endereco? = Endereco(logradouro = "Rua Vergueiro")
 
-    val endereco = Endereco(
-        logradouro = "Rua Vergueiro",
-        complemento = "Alura",
-        cep = "00000-000"
-    )
-    var enderecoNovo = Endereco(
-        logradouro = "Rua Vergueiro",
-        complemento = "Alura",
-        cep = "00000-000"
-    )
+    // O let coloca nosso objeto dentro de uma scope function
+    enderecoNulo?.let {
+        println(it.logradouro.length)
+        // Elvis operator, se for nulo, retornará o valor após o ?:
+        val tamanhoComplemento: Int = it.complemento?.length ?: 0
+        println(tamanhoComplemento)
+    }
 
-    println(endereco.equals(enderecoNovo))
-    println(endereco.equals(endereco))
+    val tamanhoComplemento: Int = try {
+        // Podemos usar o elis também para lançar exceção
+        enderecoNulo?.complemento?.length ?: throw IllegalStateException()
+    } catch (e: IllegalStateException) {
+        println("Complemento não pode ser vazio")
+        0
+    }
+    println(tamanhoComplemento)
 
-    println(endereco.hashCode())
-    println(enderecoNovo.hashCode())
+    // Outras formas de usar o let
+    enderecoNulo?.let { endereco ->
+        println(endereco.logradouro.length)
+    }
 
+    // Encadeamento de safe call
+    enderecoNulo.let { endereco: Endereco? ->
+        println(endereco?.logradouro?.length)
+    }
 
-    // Representação do objeto
-    println(endereco.toString())
-    // Chama o toString internamente
-    println(endereco)
-    println(enderecoNovo.toString())
+    /*
+    // Apenas pega o campo se não for nulo
+    enderecoNulo?.logradouro
+    //Garantimos que o objeto não é nulo
+    val enderecoNaoNulo: Endereco = enderecoNulo!!
+    enderecoNaoNulo.logradouro
+     */
+    teste("a")
+}
 
-    enderecoNovo = endereco
-    println(endereco.equals(enderecoNovo))
-    println("${enderecoNovo.javaClass}@${
-        Integer.toHexString(enderecoNovo.hashCode())}")
+fun teste(valor: Any) {
+    val numero: Int? = valor as? Int
+    println(numero)
 }

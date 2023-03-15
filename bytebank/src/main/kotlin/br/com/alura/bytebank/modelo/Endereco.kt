@@ -7,7 +7,8 @@ class Endereco(
     var cidade: String = "",
     var estado: String = "",
     var cep: String = "",
-    var complemento: String = ""
+    // Deve ser evitado criar variáveis que podem ser nulas
+    var complemento: String? = null
 ) {
     override fun toString(): String {
         // raw string

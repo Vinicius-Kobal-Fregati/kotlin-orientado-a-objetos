@@ -1,6 +1,7 @@
 package br.com.alura.bytebank.modelo
 
-import br.com.alura.bytebank.modelo.Conta
+import br.com.alura.bytebank.exception.FalhaAutenticacaoException
+import br.com.alura.bytebank.exception.SaldoInsuficienteException
 
 abstract class ContaTransferivel(
     titular: Cliente,
@@ -8,15 +9,25 @@ abstract class ContaTransferivel(
 ) : Conta(
     titular = titular,
     numero = numero
-) {
+), Autenticavel {
 
-    fun transfere(valor: Double, destino: Conta): Boolean {
-        if (saldo >= valor) {
-            println("Transferência da conta do(a) $titular para o(a) ${destino.titular}")
-            saldo -= valor
-            destino.deposita(valor)
-            return true
+    fun transfere(valor: Double, destino: Conta, senha: Int) {
+        if (saldo < valor) {
+            throw SaldoInsuficienteException(mensagem = "O saldo é insuficiente, " +
+                    "saldo atual: $saldo, valor a ser subtraído: $valor"
+            )
         }
-        return false
+        else if (!autentica(senha)) {
+            throw FalhaAutenticacaoException()
+        }
+
+        println("Transferência da conta do(a) ${titular.nome} para o(a) ${destino.titular.nome}")
+        saldo -= valor
+        destino.deposita(valor)
+        throw RuntimeException()
+    }
+
+    override fun autentica(senha: Int): Boolean {
+        return titular.autentica(senha)
     }
 }
