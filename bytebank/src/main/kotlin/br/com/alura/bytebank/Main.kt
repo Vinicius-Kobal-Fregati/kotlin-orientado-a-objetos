@@ -1,36 +1,23 @@
 package br.com.alura.bytebank
 
-import br.com.alura.bytebank.modelo.Endereco
-
 fun main() {
     println("Bem vindo ao Bytebank")
 
-    val endereco = Endereco(
-        logradouro = "Rua Vergueiro",
-        complemento = "Alura",
-        cep = "00000-000"
-    )
-    var enderecoNovo = Endereco(
-        logradouro = "Rua Vergueiro",
-        complemento = "Alura",
-        cep = "00000-000"
-    )
+    println("início main")
+    funcao1()
+    println("fim main")
+}
 
-    println(endereco.equals(enderecoNovo))
-    println(endereco.equals(endereco))
+fun funcao1() {
+    println("início funcao1")
+    funcao2()
+    println("fim funcao1")
+}
 
-    println(endereco.hashCode())
-    println(enderecoNovo.hashCode())
-
-
-    // Representação do objeto
-    println(endereco.toString())
-    // Chama o toString internamente
-    println(endereco)
-    println(enderecoNovo.toString())
-
-    enderecoNovo = endereco
-    println(endereco.equals(enderecoNovo))
-    println("${enderecoNovo.javaClass}@${
-        Integer.toHexString(enderecoNovo.hashCode())}")
+fun funcao2() {
+    println("início funcao2")
+    for (i in 1..5) {
+        println(i)
+    }
+    println("fim funcao2")
 }
