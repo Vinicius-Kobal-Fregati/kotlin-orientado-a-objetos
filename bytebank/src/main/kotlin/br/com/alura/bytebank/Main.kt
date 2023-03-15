@@ -12,7 +12,12 @@ fun main() {
 
 fun funcao1() {
     println("início funcao1")
-    funcao2()
+    try {
+        funcao4()
+    } catch (e: ClassCastException) {
+        println("ClassCastException foi pega")
+    }
+    //funcao3()
     println("fim funcao1")
 }
 
@@ -21,7 +26,36 @@ fun funcao2() {
     for (i in 1..5) {
         println(i)
         val endereco = Any()
-        endereco as Endereco
+        try {
+            endereco as Endereco
+        } catch (e: ClassCastException) {
+            println("ClassCastException foi pega")
+        }
     }
     println("fim funcao2")
+}
+
+fun funcao3() {
+    println("início funcao3")
+    // Ao ocorrer a exception, como o escopo do for não sabe lidar com o erro, ela sobe de escopo, mudando o fluxo do código
+    try {
+        for (i in 1..5) {
+            println(i)
+            val endereco = Any()
+            endereco as Endereco
+        }
+    } catch (e: ClassCastException) {
+        println("ClassCastException foi pega")
+    }
+    println("fim funcao3")
+}
+
+fun funcao4() {
+    println("início funcao4")
+    for (i in 1..5) {
+        println(i)
+        val endereco = Any()
+        endereco as Endereco
+    }
+    println("fim funcao4")
 }
