@@ -1,8 +1,5 @@
 package br.com.alura.bytebank.modelo
 
-var totalContas = 0
-    private set
-
 abstract class Conta(
     var titular: Cliente,
     val numero: Int = 0
@@ -17,12 +14,19 @@ abstract class Conta(
             }
         }
      */
-    var total = 0
+
+    // Object declaration
+    // Com o companion conseguimos compartilhar os membros do object declaration quando estiver dentro de uma classe
+    // Seria a forma de fazer o membro estático no Kotlin
+    companion object {
+        var total = 0
+            private set
+    }
 
     // Executa um trecho de código durante a inicialização
     init {
         println("Conta do(a) $titular criada")
-        totalContas++
+        total++
     }
 
     /*

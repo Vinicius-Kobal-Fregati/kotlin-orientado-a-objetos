@@ -24,5 +24,5 @@ fun main() {
     var contaPoupanca = ContaPoupanca(titular = vinicius, numero = 1000)
 
     testaContasDiferentes()
-    println("total de contas: $totalContas")
+    println("total de contas: ${Conta.total}")
 }
