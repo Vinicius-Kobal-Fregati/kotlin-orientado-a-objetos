@@ -21,7 +21,7 @@ abstract class ContaTransferivel(
             throw FalhaAutenticacaoException()
         }
 
-        println("Transferência da conta do(a) $titular para o(a) ${destino.titular}")
+        println("Transferência da conta do(a) ${titular.nome} para o(a) ${destino.titular.nome}")
         saldo -= valor
         destino.deposita(valor)
         throw RuntimeException()
