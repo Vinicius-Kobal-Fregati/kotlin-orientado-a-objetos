@@ -1,5 +1,8 @@
 package br.com.alura.bytebank.modelo
 
+var totalContas = 0
+    private set
+
 abstract class Conta(
     var titular: Cliente,
     val numero: Int = 0
@@ -14,10 +17,12 @@ abstract class Conta(
             }
         }
      */
+    var total = 0
 
     // Executa um trecho de código durante a inicialização
     init {
-        println("modelo.Conta do(a) $titular criada")
+        println("Conta do(a) $titular criada")
+        totalContas++
     }
 
     /*
