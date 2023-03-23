@@ -1,49 +1,82 @@
 package br.com.alura.bytebank
 
-import br.com.alura.bytebank.modelo.Endereco
-
+var numero = 10
 fun main() {
     println("Bem vindo ao Bytebank")
-    var enderecoNulo: Endereco? = Endereco(logradouro = "Rua Vergueiro")
+    println(soma(1, 2))
+    numero = 3
+    println(soma(1, 2))
 
-    // O let coloca nosso objeto dentro de uma scope function
-    enderecoNulo?.let {
-        println(it.logradouro.length)
-        // Elvis operator, se for nulo, retornará o valor após o ?:
-        val tamanhoComplemento: Int = it.complemento?.length ?: 0
-        println(tamanhoComplemento)
-    }
+//    testaTipoFuncaoReferencia()
+//    testaTipoFuncaoClasse()
+//    testaOperadorInvoke()
 
-    val tamanhoComplemento: Int = try {
-        // Podemos usar o elis também para lançar exceção
-        enderecoNulo?.complemento?.length ?: throw IllegalStateException()
-    } catch (e: IllegalStateException) {
-        println("Complemento não pode ser vazio")
-        0
+    // Expressão lambda
+    val minhaFuncaoLambda: () -> Unit = {
+        println("Executa como lambda")
     }
-    println(tamanhoComplemento)
+    println(minhaFuncaoLambda)
+    println(minhaFuncaoLambda())
 
-    // Outras formas de usar o let
-    enderecoNulo?.let { endereco ->
-        println(endereco.logradouro.length)
+    // Expressão anônima
+    // Tanto essa como a lambda não podem ser reutilizadas em outra variável
+    val minhaFuncaoAnonima: () -> Unit = fun() {
+        println("Executa como anônimo")
     }
-
-    // Encadeamento de safe call
-    enderecoNulo.let { endereco: Endereco? ->
-        println(endereco?.logradouro?.length)
-    }
+    println(minhaFuncaoAnonima)
+    println(minhaFuncaoAnonima())
 
     /*
-    // Apenas pega o campo se não for nulo
-    enderecoNulo?.logradouro
-    //Garantimos que o objeto não é nulo
-    val enderecoNaoNulo: Endereco = enderecoNulo!!
-    enderecoNaoNulo.logradouro
+    // Esses dois casos não funcionam, elas não podem ser reutilizadas em outras variáveis
+    val reutilizandoLambda: () -> Unit = ::minhaFuncaoLambda
+    val reutilizandoAnonimo: () -> Unit = ::minhaFuncaoAnonima
      */
-    teste("a")
 }
 
-fun teste(valor: Any) {
-    val numero: Int? = valor as? Int
-    println(numero)
+private fun testaOperadorInvoke() {
+    val testeOperador = Teste()
+    testeOperador(10)
 }
+
+private fun testaTipoFuncaoClasse() {
+    val minhaFuncaoClasses: () -> Unit = Teste()
+    // Exibe a referência do nosso objeto
+    println(minhaFuncaoClasses)
+    // Executa o invoke
+    println(minhaFuncaoClasses())
+}
+
+private fun testaTipoFuncaoReferencia() {
+    // Os parêntesis são os parâmetros, a seta seria o retorno
+    // Assim não conseguimos usar ela
+    //val minhaFuncao: () -> Unit
+
+    // Dessa forma usamos a assinatura, a referência da função
+    val minhaFuncao: () -> Unit = ::teste
+    // Lazy avaliation, só chamamos ele, não inicializamos
+    println(minhaFuncao)
+    // Esse executa nossa referência de teste e exibe o retorno, o Unit
+    println(minhaFuncao())
+}
+
+fun teste() {
+    println("Executa teste")
+}
+
+class Teste : () -> Unit {
+    override fun invoke() {
+        println("Executa invoke do Teste")
+    }
+
+    // Aqui se uma referência utilizar o nome e após os parêntesis, executará esse trecho.
+    // Independe da implementação da função.
+    operator fun invoke(valor: Int) {
+        println(valor)
+    }
+}
+
+// Isso se assemelha mais à orientação a objetos, veja que mantém estado.
+fun soma(a: Int, b: Int) : Int = a + b + numero
+
+// Essa função se assemelha mais à funcional, ela é pura, ou seja, para mesmos argumentos o retorno será igual
+fun somaFuncional(a: Int, b: Int) : Int = a + b
