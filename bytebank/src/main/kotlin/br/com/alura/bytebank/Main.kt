@@ -27,7 +27,7 @@ fun main() {
         b
     }
 
-    val maisUmaFuncaoLambda = { a: Int , b: Int ->
+    val maisUmaFuncaoLambda = { a: Int, b: Int ->
         println("Executa como lambda")
         // Lembrando que a última linha é o retorno
         a + b
@@ -35,6 +35,19 @@ fun main() {
 
     println(minhaFuncaoLambda)
     println(minhaFuncaoLambda(15, 10))
+
+    // Com salário passamos a identificação do que é esse parâmetro.
+    // O retorno normal na lambda devolve para quem a chamou, nesse caso, o main.
+    // Para criarmos o label adicionamos seu nome com o @ no fim.
+    // Por boa prática, evite utilizar muito o it, mesmo podendo.
+    val calculaBonificacao: (salario: Double) -> Double = lambda@{ salario ->
+        if (salario > 1000.0) {
+            // Assim conseguimos tanto retornar aqui para o label quanto na última instrução
+            return@lambda salario + 50
+        }
+        salario + 100.0
+    }
+    print(calculaBonificacao(1100.0))
 
     // Expressão anônima
     // Tanto essa como a lambda não podem ser reutilizadas em outra variável.
@@ -57,6 +70,16 @@ fun main() {
     }
     println(minhaFuncaoAnonima)
     println(minhaFuncaoAnonima(20, 5))
+
+    val calculaBonificacaoAnonima: (salario: Double) -> Double =
+        fun(salario): Double {
+            if (salario > 1000.0) {
+                // Assim conseguimos tanto retornar aqui para o label quanto na última instrução
+                return salario + 50
+            }
+            return salario + 100.0
+        }
+    println(calculaBonificacaoAnonima(1100.0))
 
     /*
     // Esses dois casos não funcionam, elas não podem ser reutilizadas em outras variáveis
