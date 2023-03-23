@@ -7,6 +7,46 @@ fun main() {
     numero = 3
     println(soma(1, 2))
 
+//    testaTipoFuncaoReferencia()
+//    testaTipoFuncaoClasse()
+//    testaOperadorInvoke()
+
+    // Expressão lambda
+    val minhaFuncaoLambda: () -> Unit = {
+        println("Executa como lambda")
+    }
+    println(minhaFuncaoLambda)
+    println(minhaFuncaoLambda())
+
+    // Expressão anônima
+    // Tanto essa como a lambda não podem ser reutilizadas em outra variável
+    val minhaFuncaoAnonima: () -> Unit = fun() {
+        println("Executa como anônimo")
+    }
+    println(minhaFuncaoAnonima)
+    println(minhaFuncaoAnonima())
+
+    /*
+    // Esses dois casos não funcionam, elas não podem ser reutilizadas em outras variáveis
+    val reutilizandoLambda: () -> Unit = ::minhaFuncaoLambda
+    val reutilizandoAnonimo: () -> Unit = ::minhaFuncaoAnonima
+     */
+}
+
+private fun testaOperadorInvoke() {
+    val testeOperador = Teste()
+    testeOperador(10)
+}
+
+private fun testaTipoFuncaoClasse() {
+    val minhaFuncaoClasses: () -> Unit = Teste()
+    // Exibe a referência do nosso objeto
+    println(minhaFuncaoClasses)
+    // Executa o invoke
+    println(minhaFuncaoClasses())
+}
+
+private fun testaTipoFuncaoReferencia() {
     // Os parêntesis são os parâmetros, a seta seria o retorno
     // Assim não conseguimos usar ela
     //val minhaFuncao: () -> Unit
@@ -17,15 +57,6 @@ fun main() {
     println(minhaFuncao)
     // Esse executa nossa referência de teste e exibe o retorno, o Unit
     println(minhaFuncao())
-
-    val minhaFuncaoClasses: () -> Unit = Teste()
-    // Exibe a referência do nosso objeto
-    println(minhaFuncaoClasses)
-    // Executa o invoke
-    println(minhaFuncaoClasses())
-
-    val testeOperador = Teste()
-    testeOperador(10)
 }
 
 fun teste() {
