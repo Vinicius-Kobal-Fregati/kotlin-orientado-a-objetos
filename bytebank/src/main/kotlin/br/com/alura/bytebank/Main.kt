@@ -4,36 +4,43 @@ import br.com.alura.bytebank.modelo.Endereco
 
 fun main() {
     println("Bem vindo ao Bytebank")
-    Endereco().let {
-        it
+    // Com Higher-order function não precisaríamos dessa variável
+//    val endereco = Endereco(logradouro = "rua vergueiro", numeroEndereco = 3185)
+//    val enderecoEmMaiusculo = "${endereco.logradouro}, ${endereco.numeroEndereco}".uppercase()
+//    println(enderecoEmMaiusculo)
+
+    val enderecoEmMaiusculo = Endereco(
+        logradouro = "rua vergueiro",
+        numeroEndereco = 3185
+    ).let { endereco ->
+        "${endereco.logradouro}, ${endereco.numeroEndereco}".uppercase()
     }
-    // Passamos uma função dentro da outra
-    "".let (::testeRecebeString)
-    // Seu generics faz com que o tipo do it seja o tipo do objeto que invocou o let
-    1.let {
-        it
+    println(enderecoEmMaiusculo)
+
+    // Encadeando as funções, não precisamos criar nenhuma variável
+    Endereco(
+        logradouro = "rua vergueiro",
+        numeroEndereco = 3185
+    ).let { endereco ->
+        "${endereco.logradouro}, ${endereco.numeroEndereco}".uppercase()
+    }.let { enderecoEmMaiusculoNoLet ->
+        println(enderecoEmMaiusculoNoLet)
     }
-    teste {}
 
-    // Quando a função não está por último,
-    // ela precisa ficar dentro dos parêntesis
-    testePrimeiroFuncao({}, 2)
+    // Maneira mais enxuta ainda
+    Endereco(
+        logradouro = "rua vergueiro",
+        numeroEndereco = 3185
+    ).let { endereco ->
+        "${endereco.logradouro}, ${endereco.numeroEndereco}".uppercase()
+    }.let(::println)
 
-    // Quando a função está por último nos parâmetros,
-    // ela não precisa ficar dentro dos parêntesis
-    testeUltimoFuncao(2) {}
+
+    // Fazendo a chamada para filtrar uma lista com higher-order function
+    listOf(
+        Endereco(complemento = "casa"),
+        Endereco(),
+        Endereco(complemento = "apartamento")
+    ).filter { endereco -> endereco.complemento?.isNotEmpty() ?: false }
+        .let(::println)
 }
-
-// Podemos passar uma função como parâmetro de outra função
-fun teste(bloco: () -> Unit) {
-
-}
-
-fun testeRecebeString(valor: String) {
-
-}
-
-// Higher order function, quando uma função recebe outra, ou quando retorna outra
-fun testePrimeiroFuncao(bloco: () -> Unit, numero: Int) {}
-fun testeUltimoFuncao(numero: Int, bloco: () -> Unit) {}
-fun testeRetornaFuncao(numero: Int): () -> Unit {return {}}
