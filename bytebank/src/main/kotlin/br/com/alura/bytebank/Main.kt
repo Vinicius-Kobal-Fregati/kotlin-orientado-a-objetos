@@ -3,14 +3,17 @@ package br.com.alura.bytebank
 var numero = 10
 fun main() {
     println("Bem vindo ao Bytebank")
-    println(soma(1, 2))
-    numero = 3
-    println(soma(1, 2))
+//    println(somaNaoFuncional(1, 2))
+//    println(somaFuncional(1, 2))
+//    numero = 3
+//    println(somaNaoFuncional(1, 2))
+//    println(somaFuncional(1, 2))
 
-//    testaTipoFuncaoReferencia()
-//    testaTipoFuncaoClasse()
+    testaTipoFuncaoReferencia()
+    testaTipoFuncaoClasse()
 //    testaOperadorInvoke()
 
+    /*
     // Expressão lambda
     val minhaFuncaoLambda: () -> Unit = {
         println("Executa como lambda")
@@ -31,19 +34,21 @@ fun main() {
     val reutilizandoLambda: () -> Unit = ::minhaFuncaoLambda
     val reutilizandoAnonimo: () -> Unit = ::minhaFuncaoAnonima
      */
+     */
 }
 
 private fun testaOperadorInvoke() {
-    val testeOperador = Teste()
-    testeOperador(10)
+    val somaOperador = Soma()
+    somaOperador(10)
 }
 
 private fun testaTipoFuncaoClasse() {
-    val minhaFuncaoClasses: () -> Unit = Teste()
+    // Perceba que não passamos no construtor do objeto os valores da função, apenas quando invocamos ele
+    val minhaFuncaoClasses: (Int, Int) -> Int = Soma()
     // Exibe a referência do nosso objeto
     println(minhaFuncaoClasses)
     // Executa o invoke
-    println(minhaFuncaoClasses())
+    println(minhaFuncaoClasses(10, 10))
 }
 
 private fun testaTipoFuncaoReferencia() {
@@ -52,20 +57,21 @@ private fun testaTipoFuncaoReferencia() {
     //val minhaFuncao: () -> Unit
 
     // Dessa forma usamos a assinatura, a referência da função
-    val minhaFuncao: () -> Unit = ::teste
+    val minhaFuncao: (Int, Int) -> Int = ::soma
     // Lazy avaliation, só chamamos ele, não inicializamos
     println(minhaFuncao)
     // Esse executa nossa referência de teste e exibe o retorno, o Unit
-    println(minhaFuncao())
+    println(minhaFuncao(1, 2))
 }
 
-fun teste() {
-    println("Executa teste")
+fun soma(a: Int, b: Int) : Int {
+    return a + b
 }
 
-class Teste : () -> Unit {
-    override fun invoke() {
-        println("Executa invoke do Teste")
+class Soma : (Int, Int) -> Int {
+    // O override invoke sempre deve ter mesma assinatura que a implementada
+    override fun invoke(a: Int, b: Int): Int {
+        return a + b
     }
 
     // Aqui se uma referência utilizar o nome e após os parêntesis, executará esse trecho.
@@ -76,7 +82,7 @@ class Teste : () -> Unit {
 }
 
 // Isso se assemelha mais à orientação a objetos, veja que mantém estado.
-fun soma(a: Int, b: Int) : Int = a + b + numero
+fun somaNaoFuncional(a: Int, b: Int): Int = a + b + numero
 
 // Essa função se assemelha mais à funcional, ela é pura, ou seja, para mesmos argumentos o retorno será igual
-fun somaFuncional(a: Int, b: Int) : Int = a + b
+fun somaFuncional(a: Int, b: Int): Int = a + b
