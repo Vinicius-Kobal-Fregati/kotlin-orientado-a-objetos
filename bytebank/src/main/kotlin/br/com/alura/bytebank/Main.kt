@@ -1,6 +1,8 @@
 package br.com.alura.bytebank
 
+import br.com.alura.bytebank.modelo.Autenticavel
 import br.com.alura.bytebank.modelo.Endereco
+import br.com.alura.bytebank.modelo.SistemaInterno
 
 fun main() {
     println("Bem vindo ao Bytebank")
@@ -43,4 +45,39 @@ fun main() {
         Endereco(complemento = "apartamento")
     ).filter { endereco -> endereco.complemento?.isNotEmpty() ?: false }
         .let(::println)
+
+    //println(soma(1, 5))
+
+    // Executa o bloco quando ocorrer algo
+    soma2(1, 5) {
+        println(it)
+    }
+
+    soma2(1, 5, resultado = {
+        println(it)
+    })
+
+    val autenticavel = object: Autenticavel {
+        val senha = 1234
+        override fun autentica(senha: Int): Boolean {
+            return this.senha == senha
+        }
+    }
+
+    SistemaInterno().entra(autenticavel, 1234, autenticado = {
+        // Só será executado se entrar no escopo do if do entra
+        println("Realizar pagamento")
+    })
+}
+
+fun soma(a: Int, b: Int): Int {
+    return a + b
+}
+
+// Código comum para eventos
+fun soma2(a: Int, b: Int, resultado: (Int) -> Unit) {
+    println("Antes da soma")
+    // Sem esse, ele não executaria o bloco de quem chamou
+    resultado(a + b)
+    println("Depois da soma")
 }

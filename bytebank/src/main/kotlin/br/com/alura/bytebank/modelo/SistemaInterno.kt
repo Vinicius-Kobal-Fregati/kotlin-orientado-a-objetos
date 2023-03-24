@@ -2,9 +2,12 @@ package br.com.alura.bytebank.modelo
 
 class SistemaInterno {
 
-    fun entra(admin: Autenticavel, senha: Int) {
+    // Usou default no Unit para evitar que quebre o código antigo
+    fun entra(admin: Autenticavel, senha: Int, autenticado: () -> Unit = {}) {
         if(admin.autentica(senha)) {
             println("Bem vindo ao sistema Bytebank")
+            // Quando for autenticado, pode executar alguma função
+            autenticado()
         } else {
             println("Falha na autenticacao")
         }
