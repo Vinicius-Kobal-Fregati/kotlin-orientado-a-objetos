@@ -37,6 +37,14 @@ fun main() {
         "${endereco.logradouro}, ${endereco.numeroEndereco}".uppercase()
     }.let(::println)
 
+    // O apply é um reciver lambda, ele é this. Acessamos seus membros sem a referência
+    Endereco(
+        logradouro = "rua vergueiro",
+        numeroEndereco = 3185
+    ).apply {
+        "${logradouro}, ${numeroEndereco}".uppercase()
+    }.let(::println)
+
 
     // Fazendo a chamada para filtrar uma lista com higher-order function
     listOf(
