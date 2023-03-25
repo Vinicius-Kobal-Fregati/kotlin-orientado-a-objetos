@@ -37,11 +37,14 @@ fun main() {
         "${endereco.logradouro}, ${endereco.numeroEndereco}".uppercase()
     }.let(::println)
 
-    // O apply é um reciver lambda, ele é this. Acessamos seus membros sem a referência
+    // O apply é um receiver lambda, ele é this. Acessamos seus membros sem a referência
+    // O retorno do apply (e also) retorna o objeto do contexto (quem chamou a função)
+    // Mudou-se do apply para run pois este também é receiver mas seu retorno é o resultado da lambda
+    // let, run e with retornam o resultado da lambda
     Endereco(
         logradouro = "rua vergueiro",
         numeroEndereco = 3185
-    ).apply {
+    ).run {
         "${logradouro}, ${numeroEndereco}".uppercase()
     }.let(::println)
 
