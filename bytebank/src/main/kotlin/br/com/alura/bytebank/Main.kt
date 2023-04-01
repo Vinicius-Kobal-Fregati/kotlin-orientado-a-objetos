@@ -3,6 +3,7 @@ package br.com.alura.bytebank
 import br.com.alura.bytebank.modelo.Autenticavel
 import br.com.alura.bytebank.modelo.Endereco
 import br.com.alura.bytebank.modelo.SistemaInterno
+import kotlin.random.Random
 
 fun main() {
     println("Bem vindo ao Bytebank")
@@ -103,6 +104,17 @@ fun main() {
         // Só será executado se entrar no escopo do if do entra
         println("Realizar pagamento")
     })
+
+    // TakeIf e TakeUnless
+    val numero = Random.nextInt(100)
+
+    // Se for um objeto válido, retorna ele mesmo, se não for, retorna null
+    val par = numero.takeIf { it % 2 == 0 }
+    // O contrário do takeIf, se não for um objeto válido retorna ele, se for, null
+    val impar = numero.takeUnless { it % 2 == 0 }
+
+    println("Par : $par, impar: $impar")
+
 }
 
 fun soma(a: Int, b: Int): Int {
