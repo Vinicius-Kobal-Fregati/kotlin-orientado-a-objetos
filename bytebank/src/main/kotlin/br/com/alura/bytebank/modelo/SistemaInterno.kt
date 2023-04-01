@@ -18,4 +18,18 @@ class SistemaInterno {
             else -> println("Opções reduzidas")
         }
     }
+
+    fun entraReceiver(admin: Autenticavel, senha: Int, autenticado: SistemaInterno.() -> Unit = {}) {
+        if(admin.autentica(senha)) {
+            println("Bem vindo ao sistema Bytebank")
+            // Quando for autenticado, pode executar alguma função
+            autenticado()
+        } else {
+            println("Falha na autenticacao")
+        }
+    }
+
+    fun pagamento() {
+        println("Realizando pagamento")
+    }
 }
