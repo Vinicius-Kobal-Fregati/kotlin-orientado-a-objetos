@@ -25,7 +25,7 @@ abstract class Conta(
 
     // Executa um trecho de código durante a inicialização
     init {
-        println("Conta do(a) $titular criada")
+        println("Conta do(a) ${titular.nome} criada")
         total++
     }
 
@@ -38,7 +38,7 @@ abstract class Conta(
      */
 
     fun deposita(valor: Double) {
-        println("Depositando na conta do(a) $titular")
+        println("Depositando na conta do(a) ${titular.nome}")
         this.saldo += valor
     }
 
